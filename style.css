@@ -34,5 +34,16 @@ a:hover, a:focus-visible { color: var(--gold); }
   margin: 10px 0;
 }
 .liens a { display: block; padding: 14px 16px; text-decoration: none; }
+ol { padding-left: 1.4em; }
+.bouton {
+  display: inline-block;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #d62839 0%, var(--orange) 55%, var(--gold) 100%);
+  color: #150c05;
+  font-weight: 700;
+  text-decoration: none;
+}
+.bouton:hover, .bouton:focus-visible { color: #150c05; filter: brightness(1.08); }
 footer { border-top: 1px solid var(--line); color: var(--chalk-dim); }
 footer p { color: var(--chalk-dim); font-size: 0.9rem; }

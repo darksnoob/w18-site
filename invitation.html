@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invitation d'un coach · W18</title>
+<meta name="description" content="Un coach t'invite à le laisser suivre ton entraînement dans W18.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<p class="retour"><a href="index.html">← W18</a></p>
+<h1>Invitation d'un coach</h1>
+<p class="intro">Un coach t'invite à le laisser suivre ton entraînement dans W18.</p>
+<p><a class="bouton" id="ouvrir" href="haltero://invitation">Ouvrir dans W18</a></p>
+<h2>Si l'application ne s'ouvre pas</h2>
+<ol>
+<li>Installe l'application W18 et crée ton compte.</li>
+<li>Ouvre Plus › Mes coachs › Rejoindre un coach.</li>
+<li>Saisis ce code : <strong id="code">celui que ton coach t'a envoyé</strong></li>
+</ol>
+<p>Rien n'est partagé tant que tu n'as pas accepté, dans l'application, après avoir vu ce que ton coach pourra consulter. Tu pourras retirer ton accord à tout moment. L'invitation vaut 48 heures.</p>
+<script>
+(function () {
+  var code = decodeURIComponent(location.hash.slice(1))
+    .toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 20);
+  if (!code) return;
+  document.getElementById('code').textContent = code;
+  document.getElementById('ouvrir').href =
+    'haltero://invitation?invitation=' + encodeURIComponent(code);
+})();
+</script>
+</main>
+<footer>
+<p>W18 · éditeur : Remy RX · <a href="mailto:remyryrx@gmail.com">remyryrx@gmail.com</a></p>
+</footer>
+</body>
+</html>
