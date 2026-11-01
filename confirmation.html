@@ -14,7 +14,7 @@
 <h1>Adresse confirmée</h1>
 <p class="intro">Ton compte W18 est activé.</p>
 <p><a class="bouton" id="ouvrir" href="haltero://login-callback">Ouvrir W18</a></p>
-<p>Sur l'iPhone qui t'a servi à créer ton compte, ce bouton t'y connecte directement.</p>
+<p>Sur l'iPhone qui t'a servi à créer ton compte, W18 s'ouvre et te connecte. Sinon, touche ce bouton.</p>
 <h2>Si l'application ne s'ouvre pas</h2>
 <p>Ouvre W18 et touche « J'ai confirmé mon adresse », ou connecte-toi avec ton e-mail et ton mot de passe.</p>
 </div>
@@ -39,8 +39,13 @@
   document.getElementById('neutre').hidden = true;
   document.getElementById(bloc).hidden = false;
   if (code) {
-    document.getElementById('ouvrir').href =
-      'haltero://login-callback?code=' + encodeURIComponent(code);
+    var appli = 'haltero://login-callback?code=' + encodeURIComponent(code);
+    document.getElementById('ouvrir').href = appli;
+    // iOS seulement : Safari y garde la page si l'app manque, alors que
+    // Chrome sur Android la remplace par une page d'erreur.
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+      location.href = appli;
+    }
   }
 })();
 </script>
