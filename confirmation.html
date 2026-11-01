@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmation d'adresse · W18</title>
+<meta name="description" content="Confirmation de ton adresse e-mail W18.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<p class="retour"><a href="index.html">← W18</a></p>
+<div id="confirmee" hidden>
+<h1>Adresse confirmée</h1>
+<p class="intro">Ton compte W18 est activé.</p>
+<p><a class="bouton" id="ouvrir" href="haltero://login-callback">Ouvrir W18</a></p>
+<p>Sur l'iPhone qui t'a servi à créer ton compte, ce bouton t'y connecte directement.</p>
+<h2>Si l'application ne s'ouvre pas</h2>
+<p>Ouvre W18 et touche « J'ai confirmé mon adresse », ou connecte-toi avec ton e-mail et ton mot de passe.</p>
+</div>
+<div id="erreur" hidden>
+<h1>Ce lien ne marche plus</h1>
+<p class="intro">Il a déjà servi, ou il a expiré.</p>
+<p>S'il a déjà servi, ton adresse est confirmée : connecte-toi dans W18 avec ton e-mail et ton mot de passe. Sinon, connecte-toi quand même : W18 te proposera de recevoir un nouveau lien.</p>
+</div>
+<div id="neutre">
+<h1>Confirmation d'adresse</h1>
+<p class="intro">Cette page s'affiche quand tu touches le lien reçu par e-mail après ton inscription à W18.</p>
+<p>Pour te connecter, ouvre W18 avec ton e-mail et ton mot de passe.</p>
+</div>
+<script>
+(function () {
+  var requete = new URLSearchParams(location.search);
+  var fragment = new URLSearchParams(location.hash.slice(1));
+  var code = requete.get('code');
+  var bloc = requete.get('error') || fragment.get('error') ? 'erreur'
+    : code ? 'confirmee' : null;
+  if (!bloc) return;
+  document.getElementById('neutre').hidden = true;
+  document.getElementById(bloc).hidden = false;
+  if (code) {
+    document.getElementById('ouvrir').href =
+      'haltero://login-callback?code=' + encodeURIComponent(code);
+  }
+})();
+</script>
+</main>
+<footer>
+<p>W18 · éditeur : Rémy Reneaux · <a href="mailto:remyryrx@gmail.com">remyryrx@gmail.com</a></p>
+</footer>
+</body>
+</html>
